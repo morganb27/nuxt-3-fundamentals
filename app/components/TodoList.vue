@@ -1,6 +1,15 @@
 <script setup>
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent, defineProps, ref } from '@vue/composition-api'
 // We use Vanilla JS here!
+
+defineProps({
+    title : {
+    type: String,
+    default: 'Hello Hello!',
+    required: true
+    }
+})
+
 
 const todoList= ref([]);
 const countCompleted = ref(0);
@@ -13,7 +22,7 @@ function handleFetchTodoList() {
         todoList.value = data
     console.log(data)
     countCompleted.value = countCompletedTasks(data);
-    countRemaining.value = countRemainingTaks(data);
+    countRemaining.value = countRemainingTasks(data);
     })
 }
 
@@ -21,14 +30,16 @@ function countCompletedTasks(data) {
     return data.filter(todo => todo.completed).length
 }
 
-function countRemainingTaks(data) {
+function countRemainingTasks(data) {
     return data.filter(todo => todo.completed === false).length
 }
 </script>
 
 <template>
     <div>
-    <h1>Here's the Todo List</h1>
+    <h1> {{ title }}</h1>
+    <slot></slot>
+    <h2>Here's the Todo List</h2>
     <img src="todo-image.avif" width="300" height="200"/>
     <button @click="handleFetchTodoList">Click Me</button>
     <p>Completed: {{ countCompleted }} | Remaining: {{ countRemaining }} </p>

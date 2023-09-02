@@ -1,9 +1,9 @@
 <script>
 import { defineComponent } from '@vue/composition-api'
-import TheNavBar from './components/TheNavBar.vue'
+import TodoList from '../components/TodoList.vue';
 
 export default defineComponent({
-  components: { TheNavBar },
+  components: { TodoList },
   setup() {
     
   },
@@ -12,7 +12,6 @@ export default defineComponent({
 
 <template>
   <div>
-    <TheNavBar />
-    <NuxtPage />
+    <TodoList />
   </div>
 </template>
